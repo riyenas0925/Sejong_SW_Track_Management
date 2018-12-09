@@ -4,21 +4,27 @@ from django.utils import timezone
 # Create your models here.
 
 ##########전체 트랙 정보###########
-class Track(models.Model):
-    name=models.CharField(max_length=15)
-    tag=models.CharField(max_length=1)
+class TrackList(models.Model):
+    tname=models.CharField(max_length=15)
+    tnum=models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.tname
 
-class SubList(models.Model):
-    name=models.CharField(max_length=15)
-    tagA=models.CharField(max_length=15)
-    tagB=models.CharField(max_length=15)
+class BsubList(models.Model):
+    tnum=models.IntegerField(default=0)
+    bname=models.CharField(max_length=15)
 
     def __str__(self):
-        return self.name
+        return self.bname
 
+
+class AsubList(models.Model):
+    tnum=models.IntegerField(default=0)
+    aname=models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.aname
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
