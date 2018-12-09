@@ -26,6 +26,11 @@ class AsubList(models.Model):
     def __str__(self):
         return self.aname
 
+class User(models.Model):
+    name=models.CharField(max_length=15)
+    number=models.IntegerField(default=17012345)
+    selectTrack=models.CharField(max_length=15)
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
