@@ -15,36 +15,6 @@
         <!-- Main content -->
         <section class="content container-fluid">
             <p>메인 페이지입니다.</p>
-
-
-            {% for tracklist in tracklists %}
-                <table border=1>
-                <thead>
-                    <tr>
-                        <th>{{tracklist.tname}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><th>기초교과</th></tr>
-                    {% for bsublist in bsublists %}
-                        {% if tracklist.tnum == bsublist.tnum %}
-                            <tr>
-                                <td>{{bsublist.bname}}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-
-                    <tr><th>응용교과</th></tr>
-                    {% for asublist in asublists %}
-                        {% if tracklist.tnum == asublist.tnum %}
-                            <tr>
-                                <td>{{asublist.aname}}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-                </table>
-            {% endfor %}
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
