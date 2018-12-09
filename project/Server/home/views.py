@@ -22,3 +22,6 @@ def allTrack(request):
 
 	context= { 'posts' : posts , 'tracklists':tracklists, 'bsublists':bsublists,'asublists':asublists}
 	return render(request,'home/allTrack.html',context)
+
+def resultTrack(request):
+	return render(request, 'home/resultTrack.html')
