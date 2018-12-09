@@ -5,6 +5,8 @@ from .models import Post
 from .models import TrackList
 from .models import BsubList
 from .models import AsubList
+from .models import User
+from .models import UserSub
 
 import datetime
 # Create your views here.
@@ -24,4 +26,17 @@ def allTrack(request):
 	return render(request,'home/allTrack.html',context)
 
 def resultTrack(request):
-	return render(request, 'home/resultTrack.html')
+	users=User.objects.all()
+	usersubs=UserSub.objects.all()
+	tracklists = TrackList.objects.all()
+	bsublists=BsubList.objects.all()
+	asublists=AsubList.objects.all()
+
+	context={'users':users,
+			 'usersubs':usersubs,
+			 'tracklists':tracklists,
+			 'bsublists':bsublists,
+			 'asublists':asublists,
+			 }
+
+	return render(request, 'home/resultTrack.html',context)

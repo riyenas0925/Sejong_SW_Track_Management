@@ -28,8 +28,18 @@ class AsubList(models.Model):
 
 class User(models.Model):
     name=models.CharField(max_length=15)
-    number=models.IntegerField(default=17012345)
+    number=models.CharField(max_length=10)
     selectTrack=models.CharField(max_length=15)
+    
+    def __str__(self):
+        return self.name
+
+class UserSub(models.Model):
+    number=models.CharField(max_length=10)
+    subject=models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.number
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
