@@ -237,23 +237,13 @@
             </form>
             <!-- /.search form -->
 
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">메뉴</li>
-                <!-- Optionally, you can add icons to the links -->
-                <li class="treeview">
-                    <a href="/">
-                        <i class="fa fa-clipboard"></i>
-                        <span>SW트랙</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="allTrack/"><i class="fa fa-list"></i> <span>전체 SW 트랙</span></a></li>
-                        <li><a href="${path}/board/listAll"><i class="fa fa-list"></i> <span>트랙 이수 현황</span></a></li>
-                    </ul>
-                </li>
+           <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree"><li class="header">공지</li>
+                <li class="active"><a href="/"><i class="fa fa-dashboard"></i> <span>HOME</span></a></li>
+                <li class=""><a href="/notice"><i class="fa fa-newspaper-o"></i> <span>공지사항</span></a></li>
+            <li class="header">SW 트랙</li>
+                <li class=""><a href="/allTrack"><i class="fa fa-newspaper-o"></i> <span>전체 트랙 보기</span></a></li>
+                <li class=""><a href="/"><i class="fa fa-newspaper-o"></i> <span>트랙 현황 조회</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
