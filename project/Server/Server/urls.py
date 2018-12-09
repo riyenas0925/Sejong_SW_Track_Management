@@ -23,6 +23,5 @@ from django.contrib.auth import (
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'', include('home.urls')),
 ]
