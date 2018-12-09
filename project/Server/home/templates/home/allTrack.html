@@ -1,0 +1,74 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <section class="content-header">
+            <h1 style="font-weight:bold">
+                세종대학교 소프트웨어융합대학 전체 트랙
+                <small>Sejong univ. SW Track</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Main</a></li>
+                <li class="active">Home</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+            <div class="row">
+                <div class="col-xs-12">
+                  <div class="box">
+                    <div class="box-header">
+                      <h3 class="box-title">전체 트랙 현황</h3>
+
+                      <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                          <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                      <table class="table table-hover">
+                        <tr>
+                          <th style="text-align: center">트랙 명</th>
+                          <th style="text-align: center">트랙 기초 교과</th>
+                          <th style="text-align: center">트랙 응용 교과</th>
+                        </tr>
+
+                        {% for tracklist in tracklists%}
+                        <tr>
+                          <td style="font-weight:bold;padding-top:2%;padding-bottom:2%;text-align:center;">{{tracklist.tname}}</td>
+                          <td>
+                            {% for bsublist in bsublists %}      
+                                {% if tracklist.tnum == bsublist.tnum %}
+                                    {{bsublist.bname}}<br>
+                                {% endif %}
+                            {% endfor %}
+                          </td>
+                          <td style="width:50%;">
+                            {% for asublist in asublists %}      
+                            {% if tracklist.tnum == asublist.tnum %}
+                                {{asublist.aname}},&nbsp;
+                            {% endif %}
+                          {% endfor %}    
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </table>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+              </div>
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+        </section>
+        <!-- /.content -->
+{% endblock %}

@@ -18,4 +18,4 @@ def post_list(request):
 
 	context= { 'posts' : posts , 'tracklists':tracklists, 'bsublists':bsublists,'asublists':asublists}
 
-	return render(request, 'home/home.html',context)
+	return render(request, 'home/allTrack.html',context)
