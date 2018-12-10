@@ -59,11 +59,20 @@
                 <ul class="nav navbar-nav">
                     <!-- User Account Menu -->
                     <li>
-                        <a href="/user/login">
+                        {% if user.is_active %}
+                        <a href="{% url 'login' %}">
+                            <!-- The user image in the navbar-->
+
+                            <span class="hidden-xs">{{user.username}} 님</span>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}">
                             <!-- The user image in the navbar-->
                             <i class="fa fa-key"></i>
                             <span class="hidden-xs">로그인</span>
                         </a>
+                        {% endif %}
+
                     </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
@@ -86,11 +95,19 @@
                 <div class="pull-left image">
                     <img src="../static/dist/img/default-user-image.jpg" class="img-circle" alt="User Image">
                 </div>
+                {% if user.is_active %}
                 <div class="pull-left info">
-                    <p>Guest</p>
+                    <p>{{user.username}}</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> offline</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i>{{user.username}}</a>
                 </div>
+                {% else %}
+                <div class="pull-left info">
+                    <p>손님</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i>로그인이 필요합니다.</a>
+                </div>
+                {% endif %}
             </div>
 
             <!-- search form (Optional) -->

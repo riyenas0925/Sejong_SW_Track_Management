@@ -16,12 +16,9 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import (
-    REDIRECT_FIELD_NAME, get_user_model, login as auth_login,
-    logout as auth_logout, update_session_auth_hash,
-)
 
 urlpatterns = [
     url('admin/', admin.site.urls),
+    url('^', include('django.contrib.auth.urls')),
     url(r'', include('home.urls')),
 ]
