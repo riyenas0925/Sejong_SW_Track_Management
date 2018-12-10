@@ -8,7 +8,6 @@ from .models import UserSub
 # Register your models here.
 
 
-
 admin.site.register(User)
 admin.site.register(UserSub)
 

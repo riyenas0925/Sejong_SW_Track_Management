@@ -14,6 +14,40 @@ from .models import UserSub
 import datetime
 # Create your views here.
 
+class UploadFileForm(forms.Form):
+	file = forms.FileField()
+
+
+def import_data(request):
+	if request.method == "POST":
+		form = UploadFileForm(request.POST,
+							  request.FILES)
+
+		if form.is_valid():
+			request.FILES['file'].save_book_to_database(
+				models=[UserSub],
+				initializers=[None],
+				mapdicts=[['number', 'subject']]
+			)
+			return redirect('resultTrack')
+		else:
+			return HttpResponseBadRequest()
+	else:
+		form = UploadFileForm()
+	return render(
+		request,
+		'home/upload_form.html',
+		{
+			'form': form,
+			'title': 'Import excel data into database example',
+			'header': 'Please upload sample-data.xls:'
+		})
+
+
+def handson_table(request):
+	return excel.make_response_from_tables(
+		[UserSub], 'handsontable.html')
+
 def post_list(request):
 	return render(request, 'home/main.html')
 
