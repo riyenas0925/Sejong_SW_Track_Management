@@ -39,7 +39,7 @@ class UserSub(models.Model):
     subject=models.CharField(max_length=15)
 
     def __str__(self):
-        return self.number
+        return self.subject
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
