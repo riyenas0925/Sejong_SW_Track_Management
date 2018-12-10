@@ -19,6 +19,8 @@ class UploadFileForm(forms.Form):
 
 
 def import_data(request):
+	UserSub.objects.all().delete()
+
 	if request.method == "POST":
 		form = UploadFileForm(request.POST,
 							  request.FILES)
