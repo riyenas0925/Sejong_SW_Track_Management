@@ -69,18 +69,16 @@
               {% for usersub in usersubs %}
                 {% if usersub.number == u.number %}
                   if ('{{usersub.subject}}' == '{{bsublist.bname}}'){
+                    trackstr+='<li><mark><b>{{bsublist.bname}}</b></mark></li>';
                     bcnt++;
-                    if ('{{bsublist.bname}}'!=x){
-                      trackstr+='<li><mark><b>{{bsublist.bname}}</b></mark></li>';
-                      x = '{{bsublist.bname}}';
-                    }
+                    x = '{{bsublist.bname}}';
                   }
 
                   else {
-                    if ('{{bsublist.bname}}'!=x){
+                    if ('{{bsublist.bname}}'!= x){
                       trackstr+='<li>{{bsublist.bname}}</li>';
                     }
-                    x = '{{bsublist.bname}}';
+                    x='{{bsublist.bname}}';
                   }
 
                 {% endif %}
@@ -89,17 +87,16 @@
           {% endfor %}
 
           trackstr+='</ul></td><td><ul>';
+          x="";
 
           {% for asublist in asublists %}
             {% if tracklist.tnum == asublist.tnum %}
               {% for usersub in usersubs %}
                 {% if usersub.number == u.number %}
                   if ('{{usersub.subject}}' == '{{asublist.aname}}'){
+                    trackstr+='<li><mark><b>{{asublist.aname}}</b></mark></li>';
                     acnt++;
-                    if ('{{asublist.aname}}'!=x){
-                      trackstr+='<li><mark><b>{{asublist.aname}}</b></mark></li>';
-                      x = '{{bsublist.bname}}';
-                    }
+                    x = '{{bsublist.bname}}';
                   }
 
                   else {
