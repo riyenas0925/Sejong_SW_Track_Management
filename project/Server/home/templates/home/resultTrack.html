@@ -53,6 +53,7 @@
   var bcnt=0;
   var cnt=0;
   var percent;
+  var x="";
   str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th>트랙 명</th><th>진척도</th><th style="width:60px">이수율</th></tr>';
 
   {% for u in users %}
@@ -61,41 +62,58 @@
       {% for tracklist in tracklists %}
         if('{{u.selectTrack}}'=='{{tracklist.tname}}'){
           str=str+'<tr><td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
-          trackstr+='<tr><td><ul><li>가상현실</li></ul></td></tr>';
+          trackstr+='<tr><td><ul>';
 
           {% for bsublist in bsublists %}
             {% if tracklist.tnum == bsublist.tnum %}
               {% for usersub in usersubs %}
                 {% if usersub.number == u.number %}
-                  {% if usersub.subject == bsublist.bname %}
+                  if ('{{usersub.subject}}' == '{{bsublist.bname}}'){
                     bcnt++;
-                    //trackstr+='<li><b>{{bsublist.bname}}</b></li>';
+                    if ('{{bsublist.bname}}'!=x){
+                      trackstr+='<li><mark><b>{{bsublist.bname}}</b></mark></li>';
+                      x = '{{bsublist.bname}}';
+                    }
+                  }
 
-                  {% else %}
-                    
-                  {% endif %}
+                  else {
+                    if ('{{bsublist.bname}}'!=x){
+                      trackstr+='<li>{{bsublist.bname}}</li>';
+                    }
+                    x = '{{bsublist.bname}}';
+                  }
+
                 {% endif %}
               {% endfor %}
             {% endif %}
           {% endfor %}
-          
+
+          trackstr+='</ul></td><td><ul>';
 
           {% for asublist in asublists %}
             {% if tracklist.tnum == asublist.tnum %}
               {% for usersub in usersubs %}
                 {% if usersub.number == u.number %}
-                  {% if usersub.subject == asublist.aname %}
+                  if ('{{usersub.subject}}' == '{{asublist.aname}}'){
                     acnt++;
-                    
-                  {% else %}
+                    if ('{{asublist.aname}}'!=x){
+                      trackstr+='<li><mark><b>{{asublist.aname}}</b></mark></li>';
+                      x = '{{bsublist.bname}}';
+                    }
+                  }
 
-                  {% endif %}
+                  else {
+                    if ('{{asublist.aname}}'!=x){
+                      trackstr+='<li>{{asublist.aname}}</li>';
+                    }
+                    x='{{asublist.aname}}';
+                  }
                 {% endif %}
               {% endfor %}
             {% endif %}
           {% endfor %}
 
-
+          trackstr+='</td></ul></tr>';
           if (acnt>6) {acnt=6;}
                 
           percent=Math.round((acnt+bcnt)/9*100);
