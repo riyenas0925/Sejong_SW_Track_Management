@@ -8,9 +8,23 @@ from .models import UserSub
 # Register your models here.
 
 
-admin.site.register(TrackList)
-admin.site.register(BsubList)
-admin.site.register(AsubList)
-admin.site.register(Post)
+
 admin.site.register(User)
 admin.site.register(UserSub)
+
+class TrackListadmin(admin.ModelAdmin):
+    list_display = ['tname', 'tnum']
+    list_filter = [('tname', admin.ChoicesFieldListFilter)]
+
+class BsubListadmin(admin.ModelAdmin):
+    list_display = ['bname', 'tnum']
+    list_filter = [('tnum')]
+
+class AsubListadmin(admin.ModelAdmin):
+    list_display = ['aname', 'tnum']
+    list_filter = [('tnum')]
+
+admin.site.register(BsubList, BsubListadmin)
+admin.site.register(AsubList, AsubListadmin)
+admin.site.register(TrackList, TrackListadmin)
+admin.site.register(Post)
