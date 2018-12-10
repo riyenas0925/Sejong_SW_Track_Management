@@ -21,45 +21,8 @@
               <h3 class="box-title">자신의 트랙 이수 현황</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-striped">
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th style="width: 30%">Task</th>
-                  <th>Progress</th>
-                  <th style="width: 40px">Label</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>사물인터넷</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-red">55%</span></td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>멀티미디어</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-yellow">70%</span></td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>인공지능</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-light-blue">30%</span></td>
-                </tr>
-              </table>
+            <div id="mytrack"> <!-------------테이블------------>
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -72,8 +35,7 @@
               <h3 class="box-title">전체 트랙 이수 현황</h3>
             </div>
             <!-- /.box-header -->
-            <div id="track">
-              
+            <div id="track">  <!-------------테이블------------->
             </div>
             <!-- /.box-body -->
           </div>
@@ -84,81 +46,163 @@
     </section>
     <!-- /.content -->
 
-<script> //전체트랙
-        var str="";
-        var cnt=1;
-        var percent=0;
-        var bcnt=0;
-        var acnt=0;
+<script> //자신트랙 script
+  var str="";
+  var trackstr="";
+  var acnt=0;
+  var bcnt=0;
+  var cnt=0;
+  var percent;
+  str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th>트랙 명</th><th>진척도</th><th style="width:60px">이수율</th></tr>';
 
-        str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th style="width:10px">#</th><th>트랙 현황</th><th>진척도</th><th style="width:60px">이수율</th><th style="width:60px">상태</th></tr>';
+  {% for u in users %}
+    if('{{u.number}}'=='{{user.username}}'){
+      trackstr+='<br><div class="box-body no-padding"><table class="table table-striped"><tr><th>{{u.selectTrack}} 기초 교과</th><th>{{u.selectTrack}} 응용 교과</th></tr>';
+      {% for tracklist in tracklists %}
+        if('{{u.selectTrack}}'=='{{tracklist.tname}}'){
+          str=str+'<tr><td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
+          trackstr+='<tr><td><ul><li>가상현실</li></ul></td></tr>';
 
-        {% for u in users %}
-          if ('{{u.number}}' == '{{user.username}}'){
-            {% for tracklist in tracklists %}
-              percent=0;
+          {% for bsublist in bsublists %}
+            {% if tracklist.tnum == bsublist.tnum %}
+              {% for usersub in usersubs %}
+                {% if usersub.number == u.number %}
+                  {% if usersub.subject == bsublist.bname %}
+                    bcnt++;
+                    //trackstr+='<li><b>{{bsublist.bname}}</b></li>';
 
-              str=str+'<tr><td>'+String(cnt)+'</td>'; //숫자
-              str=str+'<td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
-
-
-              {% for bsublist in bsublists %}
-                {% if tracklist.tnum == bsublist.tnum %}
-                  {% for usersub in usersubs %}
-                    {% if usersub.number == u.number %}
-                      {% if usersub.subject == bsublist.bname %}
-                        bcnt++;
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
+                  {% else %}
+                    
+                  {% endif %}
                 {% endif %}
               {% endfor %}
-
-              {% for asublist in asublists %}
-                {% if tracklist.tnum == asublist.tnum %}
-                  {% for usersub in usersubs %}
-                    {% if usersub.number == u.number %}
-                      {% if usersub.subject == asublist.aname %}
-                        acnt++;
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
-              {% endfor %}
-
-
-              if (acnt>6) {acnt=6;}
-              
-              percent=Math.round((acnt+bcnt)/9*100);
-              acnt=0; bcnt=0;
-
-              //진척률, 상태 판별
-              if(percent >= 100){
-                str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width:'+percent+'%;"></div></div></td>';
-                str=str+'<td><span class="badge bg-green">'+ percent + '%</span></td>';
-                str=str+'<td><span class="label label-success">Pass</span></td>';
-              }
-
-              else if(percent >= 70){
-                str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-warning" style="width:'+percent+'%;"></div></div></td>';
-                str=str+'<td><span class="badge bg-orange">'+ percent + '%</span></td>';
-                str=str+'<td><span class="label label-warning">Non Pass</span></td>';
-              }
-
-              else{
-                str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width:'+percent+'%;"></div></div></td>';
-                str=str+'<td><span class="badge bg-red">'+ percent + '%</span></td>';
-                str=str+'<td><span class="label label-danger">Non Pass</span></td>';
-              }
-              str+='</tr>';
-              cnt++;
-
-            {% endfor %}
-            }
+            {% endif %}
           {% endfor %}
-        str+='</table></div>';
-        document.getElementById("track").innerHTML=str;
-    </script>
+          
+
+          {% for asublist in asublists %}
+            {% if tracklist.tnum == asublist.tnum %}
+              {% for usersub in usersubs %}
+                {% if usersub.number == u.number %}
+                  {% if usersub.subject == asublist.aname %}
+                    acnt++;
+                    
+                  {% else %}
+
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+
+
+          if (acnt>6) {acnt=6;}
+                
+          percent=Math.round((acnt+bcnt)/9*100);
+          acnt=0; bcnt=0;
+
+          //진척률, 상태 판별
+          if(percent >= 100){
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-green">'+ percent + '%</span></td>';
+          }
+
+          else if(percent >= 70){
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-warning" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-orange">'+ percent+ '%</span></td>';
+          }
+
+          else{
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-red">'+ percent+ '%</span></td>';
+          }
+
+          trackstr+='</table>';
+          str+='</tr></table></div>'+trackstr;
+          document.getElementById("mytrack").innerHTML=str;
+        }
+      {% endfor %}
+    }
+  {% endfor %}
+</script>
+
+<script> //전체트랙 script
+  var str="";
+  var cnt=1;
+  var percent=0;
+  var bcnt=0;
+  var acnt=0;
+
+  str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th style="width:10px">#</th><th>트랙 현황</th><th>진척도</th><th style="width:60px">이수율</th><th style="width:60px">상태</th></tr>';
+
+  {% for u in users %}
+    if ('{{u.number}}' == '{{user.username}}'){
+      {% for tracklist in tracklists %}
+        percent=0;
+
+        str=str+'<tr><td>'+String(cnt)+'</td>'; //숫자
+        str=str+'<td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
+
+
+        {% for bsublist in bsublists %}
+          {% if tracklist.tnum == bsublist.tnum %}
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
+                {% if usersub.subject == bsublist.bname %}
+                  bcnt++;
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        {% for asublist in asublists %}
+          {% if tracklist.tnum == asublist.tnum %}
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
+                {% if usersub.subject == asublist.aname %}
+                  acnt++;
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+
+        if (acnt>6) {acnt=6;}
+              
+        percent=Math.round((acnt+bcnt)/9*100);
+        acnt=0; bcnt=0;
+
+        //진척률, 상태 판별
+        if(percent >= 100){
+          str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width:'+percent+'%;"></div></div></td>';
+          str=str+'<td><span class="badge bg-green">'+ percent + '%</span></td>';
+          str=str+'<td><span class="label label-success">Pass</span></td>';
+        }
+
+        else if(percent >= 70){
+          str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-warning" style="width:'+percent+'%;"></div></div></td>';
+          str=str+'<td><span class="badge bg-orange">'+ percent + '%</span></td>';
+          str=str+'<td><span class="label label-warning">Non Pass</span></td>';
+        }
+
+        else{
+          str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width:'+percent+'%;"></div></div></td>';
+          str=str+'<td><span class="badge bg-red">'+ percent + '%</span></td>';
+          str=str+'<td><span class="label label-danger">Non Pass</span></td>';
+        }
+        str+='</tr>';
+        cnt++;
+
+      {% endfor %}
+    }
+  {% endfor %}
+
+  str+='</table></div>';
+  document.getElementById("track").innerHTML=str;
+
+</script>
 
 
 {% endblock %}
