@@ -30,6 +30,22 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <style>
+        /*upload_form.html*/
+        #submitBtt {
+            border-style:none;
+            padding:10px;
+            border-radius:15px;
+            width:100px;
+            font-weight: bold;
+            background-color:#03cf5d;
+            color:black;
+        }
+
+    </style>
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini layout-fixed">
@@ -125,11 +141,13 @@
             <ul class="sidebar-menu" data-widget="tree"><li class="header">공지</li>
                 <li class="active"><a href="/"><i class="fa fa-dashboard"></i> <span>HOME</span></a></li>
                 <li class=""><a href="/notice"><i class="fa fa-newspaper-o"></i> <span>공지사항</span></a></li>
-            {% if user.is_active %}
+    
             <li class="header">SW 트랙</li>
                 <li class=""><a href="/allTrack"><i class="fa fa-newspaper-o"></i> <span>전체 트랙 보기</span></a></li>
+
+                {% if user.is_active %}
                 <li class=""><a href="/import"><i class="fa fa-newspaper-o"></i> <span>트랙 현황 조회</span></a></li>
-            {% endif %}
+                {% endif %}
             </ul>
             <!-- /.sidebar-menu -->
         </section>

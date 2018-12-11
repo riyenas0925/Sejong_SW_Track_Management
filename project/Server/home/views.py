@@ -80,3 +80,13 @@ def resultTrack(request):
 			 }
 
 	return render(request, 'home/resultTrack.html',context)
+
+
+
+def test(request):
+	return render(request,'home/test.html')
+
+def notice(request):
+	posts = Post.objects.all().order_by('-created_date') #날짜 역순
+	context = {'posts':posts }
+	return render(request,'home/notice.html',context)

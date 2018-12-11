@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <section class="content-header">
+        <div class="row" style="padding-top: 10px;">
+            <div class="col-md-8 col-md-offset-2">
+                
+                {% for post in posts %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-solid">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"><i class="fa fa-warning"></i> {{post.title}}</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                {{post.text}}
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                {{post.author}}<br>
+                                <sub>{{post.created_date}}</sub>
+                            </div>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                
+                {% endfor %}
+
+            </div>
+        </div>
+        </section>
+        <!-- /.content -->
+{% endblock %}
