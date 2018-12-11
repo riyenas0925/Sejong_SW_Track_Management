@@ -2,9 +2,21 @@
 
 {% block content %}
     <section class="content-header">
+        <h1>
+            공지사항
+            <small>Sejong univ. SW Track</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Main</a></li>
+            <li class="active">공지</li>
+            <li class="active">공지사항</li>
+        </ol>
+    </section>
+
+    <section class="content-header">
         <div class="row" style="padding-top: 10px;">
             <div class="col-md-8 col-md-offset-2">
-                
+
                 {% for post in posts %}
                 <div class="row">
                     <div class="col-md-12">
