@@ -11,6 +11,27 @@
                 <li class="active">Home</li>
             </ol>
     </section>
+    <br><br>
+     <div class="row" style="margin:0.5%;">
+        <div class="col-md-12">
+          <div class="box box-solid">
+              <div class="box-header with-border">
+                  <h3 class="box-title"><i class="fa fa-warning"></i>트랙 이수 조건</h3>
+                      <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div>
+              </div>
+                            <!-- /.box-header -->
+              <div class="box-body">
+                  트랙 : <b>기초교과 3개</b> + <b>응용교과 6개 이상</b> 수강 시 이수 완료<br>
+                  /*사이버 국방은 기초 8개 모두 수강해야 이수 완료*/
+              </div>
+                            <!-- /.box-body -->
+          </div>
+                        <!-- /.box -->
+        </div>
+      </div>
+
 
     <!-- Main content -->
     <section class="content">
@@ -19,6 +40,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">자신의 트랙 이수 현황</h3>
+              <small>수강 완료한 과목 : 굵은 글씨</small>
             </div>
             <!-- /.box-header -->
             <div id="mytrack"> <!-------------테이블------------>
@@ -33,6 +55,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">전체 트랙 이수 현황</h3>
+              <small>트랙명 클릭 시 해당 트랙 이수 현황 조회 가능</small>
             </div>
             <!-- /.box-header -->
             <div id="track">  <!-------------테이블------------->
@@ -46,6 +69,31 @@
     </section>
     <!-- /.content -->
 
+<!---------pop HTML------------>
+<div id="pop">
+   <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box" style="position:fixed;top:20%;left:15%; width:70%;">
+            <div class="box-header">
+              <h4 id="popTitle">트랙이수현황</h4>
+            </div>
+            <!-- /.box-header -->
+            <div id="popTrack"> <!-------------테이블------------>
+
+            </div>
+            <div class="box-footer" onclick="popD() "style="text-align:center">
+              <h4 style="color:#d9534f;">창 닫기</h4>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+</div>
+
+
 <script> //자신트랙 script
   var str="";
   var trackstr="";
@@ -53,7 +101,12 @@
   var bcnt=0;
   var cnt=0;
   var percent;
-  var x="";
+  var b=[];
+  var a=[];
+  var i,j;
+  var bi=0;
+  var ai=0;
+
   str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th>트랙 명</th><th>진척도</th><th style="width:60px">이수율</th></tr>';
 
   {% for u in users %}
@@ -62,55 +115,76 @@
       {% for tracklist in tracklists %}
         if('{{u.selectTrack}}'=='{{tracklist.tname}}'){
           str=str+'<tr><td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
-          trackstr+='<tr><td><ul>';
+          trackstr+='<tr><td>'
+        {% for bsublist in bsublists %}
+          {% if tracklist.tnum == bsublist.tnum %}
+            a[ai++]='{{bsublist.bname}}';
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
 
-          {% for bsublist in bsublists %}
-            {% if tracklist.tnum == bsublist.tnum %}
-              {% for usersub in usersubs %}
-                {% if usersub.number == u.number %}
-                  if ('{{usersub.subject}}' == '{{bsublist.bname}}'){
-                    trackstr+='<li><mark><b>{{bsublist.bname}}</b></mark></li>';
-                    bcnt++;
-                    x = '{{bsublist.bname}}';
-                  }
+                if ('{{usersub.subject}}' == '{{bsublist.bname}}' ){
+                  bcnt++;
+                  b[bi++]='{{usersub.subject}}';
+                }
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
 
-                  else {
-                    if ('{{bsublist.bname}}'!= x){
-                      trackstr+='<li>{{bsublist.bname}}</li>';
-                    }
-                    x='{{bsublist.bname}}';
-                  }
 
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
+        for(i=0;i<ai;i++){
+          for(j=0;j<bi;j++){
+            if(a[i]==b[j]) cnt++;
+          }
 
-          trackstr+='</ul></td><td><ul>';
-          x="";
+          if(cnt>0){
+            trackstr+="<li><b><mark>"+a[i]+"</mark></b></li>";
+          }
 
-          {% for asublist in asublists %}
-            {% if tracklist.tnum == asublist.tnum %}
-              {% for usersub in usersubs %}
-                {% if usersub.number == u.number %}
-                  if ('{{usersub.subject}}' == '{{asublist.aname}}'){
-                    trackstr+='<li><mark><b>{{asublist.aname}}</b></mark></li>';
-                    acnt++;
-                    x = '{{bsublist.bname}}';
-                  }
+          else{
+            trackstr+="<li>"+a[i]+"</li>";
+          }
 
-                  else {
-                    if ('{{asublist.aname}}'!=x){
-                      trackstr+='<li>{{asublist.aname}}</li>';
-                    }
-                    x='{{asublist.aname}}';
-                  }
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
+          cnt=0;
+        }
 
-          trackstr+='</td></ul></tr>';
+        ai=0;
+        bi=0;
+
+        trackstr+="</td><td>";
+        {% for asublist in asublists %}
+          {% if tracklist.tnum == asublist.tnum %}
+            a[ai++]='{{asublist.aname}}';
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
+
+                if ('{{usersub.subject}}' == '{{asublist.aname}}' ){
+                  acnt++;
+                  b[bi++]='{{usersub.subject}}';
+                }
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+
+        for(i=0;i<ai;i++){
+          for(j=0;j<bi;j++){
+            if(a[i]==b[j]) cnt++;
+          }
+
+          if(cnt>0){
+            trackstr+="<li><b><mark>"+a[i]+"</mark></b></li>";
+          }
+
+          else{
+            trackstr+="<li>"+a[i]+"</li>";
+          }
+
+          cnt=0;
+        }
+
+
           if (acnt>6) {acnt=6;}
                 
           percent=Math.round((acnt+bcnt)/9*100);
@@ -132,7 +206,7 @@
             str=str+'<td><span class="badge bg-red">'+ percent+ '%</span></td>';
           }
 
-          trackstr+='</table>';
+          trackstr+='</td></tr></ul></table>';
           str+='</tr></table></div>'+trackstr;
           document.getElementById("mytrack").innerHTML=str;
         }
@@ -147,6 +221,7 @@
   var percent=0;
   var bcnt=0;
   var acnt=0;
+  var trackStr;
 
   str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th style="width:10px">#</th><th>트랙 현황</th><th>진척도</th><th style="width:60px">이수율</th><th style="width:60px">상태</th></tr>';
 
@@ -155,8 +230,9 @@
       {% for tracklist in tracklists %}
         percent=0;
 
+
         str=str+'<tr><td>'+String(cnt)+'</td>'; //숫자
-        str=str+'<td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
+        str=str+'<td style="width : 30%">'+'<div id="linkTrack" onclick="track('+"'{{tracklist.tname}}'"+')">{{tracklist.tname}}</div>'+'</td>'; //트랙 명
 
 
         {% for bsublist in bsublists %}
@@ -216,8 +292,139 @@
 
   str+='</table></div>';
   document.getElementById("track").innerHTML=str;
-
 </script>
 
+  <script> //팝업 창
+  function popD(){
+    document.getElementById("pop").style.display="none";
+
+  }
+
+  function track(t){
+    var str="";
+    var trackstr="";
+    var acnt=0;
+    var bcnt=0;
+    var cnt=0;
+    var percent;
+    var b=[];
+    var a=[];
+    var i,j;
+    var bi=0;
+    var ai=0;
+
+  str+='<div class="box-body no-padding"><table class="table table-striped"><tr><th>트랙 명</th><th>진척도</th><th style="width:60px">이수율</th></tr>';
+
+  {% for u in users %}
+    if('{{u.number}}'=='{{user.username}}'){
+      trackstr+='<br><div class="box-body no-padding"><table class="table table-striped"><tr><th>'+t+' 기초 교과</th><th>'+t+' 응용 교과</th></tr>';
+      {% for tracklist in tracklists %}
+        if(t=='{{tracklist.tname}}'){
+          str=str+'<tr><td style="width : 30%">'+'{{tracklist.tname}}'+'</td>'; //트랙 명
+          trackstr+='<tr><td>'
+        {% for bsublist in bsublists %}
+          {% if tracklist.tnum == bsublist.tnum %}
+            a[ai++]='{{bsublist.bname}}';
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
+
+                if ('{{usersub.subject}}' == '{{bsublist.bname}}' ){
+                  bcnt++;
+                  b[bi++]='{{usersub.subject}}';
+                }
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+
+        for(i=0;i<ai;i++){
+          for(j=0;j<bi;j++){
+            if(a[i]==b[j]) cnt++;
+          }
+
+          if(cnt>0){
+            trackstr+="<li><b><mark>"+a[i]+"</mark></b></li>";
+          }
+
+          else{
+            trackstr+="<li>"+a[i]+"</li>";
+          }
+
+          cnt=0;
+        }
+
+        ai=0;
+        bi=0;
+
+        trackstr+="</td><td>";
+        {% for asublist in asublists %}
+          {% if tracklist.tnum == asublist.tnum %}
+            a[ai++]='{{asublist.aname}}';
+            {% for usersub in usersubs %}
+              {% if usersub.number == u.number %}
+
+                if ('{{usersub.subject}}' == '{{asublist.aname}}' ){
+                  acnt++;
+                  b[bi++]='{{usersub.subject}}';
+                }
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+
+        for(i=0;i<ai;i++){
+          for(j=0;j<bi;j++){
+            if(a[i]==b[j]) cnt++;
+          }
+
+          if(cnt>0){
+            trackstr+="<li><b><mark>"+a[i]+"</mark></b></li>";
+          }
+
+          else{
+            trackstr+="<li>"+a[i]+"</li>";
+          }
+
+          cnt=0;
+        }
+
+
+          if (acnt>6) {acnt=6;}
+                
+          percent=Math.round((acnt+bcnt)/9*100);
+          acnt=0; bcnt=0;
+
+          //진척률, 상태 판별
+          if(percent >= 100){
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-green">'+ percent + '%</span></td>';
+          }
+
+          else if(percent >= 70){
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-warning" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-orange">'+ percent+ '%</span></td>';
+          }
+
+          else{
+            str=str+'<td><div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width:'+percent+'%;"></div></div></td>';
+            str=str+'<td><span class="badge bg-red">'+ percent+ '%</span></td>';
+          }
+
+          trackstr+='</td></tr></ul></table>';
+          str+='</tr></table></div>'+trackstr;
+          document.getElementById("popTrack").innerHTML=str;
+          document.getElementById("pop").style.display="block";
+        }
+      {% endfor %}
+    }
+  {% endfor %}
+
+    //document.getElementById("pop").style.display="block";
+
+
+  }
+  </script>
 
 {% endblock %}
