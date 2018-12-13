@@ -166,6 +166,11 @@
                 {% if user.is_active %}
                 <li class=""><a href="/import"><i class="fa fa-newspaper-o"></i> <span>트랙 현황 조회</span></a></li>
                 {% endif %}
+
+            {% if user.is_active %}
+             <li class="header">관리자</li>
+                <li class=""><a href="/stats"><i class="fa fa-newspaper-o"></i> <span>통계 데이터</span></a></li>
+            {% endif %}
             </ul>
             <!-- /.sidebar-menu -->
         </section>

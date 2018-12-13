@@ -16,6 +16,7 @@ from .models import TrackList
 from .models import BsubList
 from .models import AsubList
 from .models import User
+from .models import TrackRate
 from .models import Sheet1
 
 
@@ -25,6 +26,12 @@ import datetime
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
+def trackRate(request):
+	trackrates = TrackRate.objects.all()
+
+	context={'trackrates':trackrates}
+
+	return render(request, 'home/stats.html',context)
 
 def import_data(request):
     Sheet1.objects.all().delete()

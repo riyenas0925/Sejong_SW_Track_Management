@@ -1,0 +1,80 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <section class="content-header">
+            <h1>
+                통계 데이터
+                <small>Sejong univ. SW Track</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Main</a></li>
+                <li class="active">관리자</li>
+                <li class="active">통계 데이터</li>
+            </ol>
+    </section>
+
+    <div class="col-md-6"><div style="height:10px;"></div></div>
+
+    <section class="content">
+      
+      <div class="col-md-12">
+      <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Line Chart</h3>
+            </div>
+
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+    </section>
+
+<!-- jQuery 3 -->
+<script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Morris.js charts -->
+<script src="../static/bower_components/raphael/raphael.min.js"></script>
+<script src="../static/bower_components/morris.js/morris.min.js"></script>
+<!-- FastClick -->
+<script src="../static/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../static/dist/js/demo.js"></script>
+<!-- page script -->
+
+<script>
+   $(function () {
+    "use strict";
+
+    // LINE CHART
+    var line = new Morris.Line({
+      element: 'line-chart',
+      resize: true,
+      data: [
+        {y: '2011 Q1', item1: 2666},
+        {y: '2011 Q2', item1: 2778},
+        {y: '2011 Q3', item1: 4912},
+        {y: '2011 Q4', item1: 3767},
+        {y: '2012 Q1', item1: 6810},
+        {y: '2012 Q2', item1: 5670},
+        {y: '2012 Q3', item1: 4820},
+        {y: '2012 Q4', item1: 15073},
+        {y: '2013 Q1', item1: 10687},
+        {y: '2013 Q2', item1: 8432}
+      ],
+      xkey: 'y',
+      ykeys: ['item1'],
+      labels: ['Item 1'],
+      lineColors: ['#3c8dbc'],
+      hideHover: 'auto'
+    });
+
+});
+
+</script>
+
+{% endblock %}

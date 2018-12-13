@@ -4,6 +4,7 @@ from .models import BsubList
 from .models import AsubList
 from .models import Post
 from .models import User
+from .models import TrackRate
 from .models import Sheet1
 # Register your models here.
 
@@ -27,3 +28,4 @@ admin.site.register(BsubList, BsubListadmin)
 admin.site.register(AsubList, AsubListadmin)
 admin.site.register(TrackList, TrackListadmin)
 admin.site.register(Post)
+admin.site.register(TrackRate)
