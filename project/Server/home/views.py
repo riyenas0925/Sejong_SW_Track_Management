@@ -178,7 +178,7 @@ def message(request):
             },
             "keyboard": {
                 "type": "buttons",
-                "buttons": ["자신의 트랙 조회", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
+                "buttons": ["공지사항", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
             }
         })
 
@@ -193,7 +193,7 @@ def message(request):
             },
             "keyboard": {
                 "type": "buttons",
-                "buttons": ["자신의 트랙 조회", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
+                "buttons": ["공지사항", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
             }
         })
 
