@@ -36,6 +36,7 @@ class User(models.Model):
 class UserSub(models.Model):
     number=models.CharField(max_length=10)
     subject=models.CharField(max_length=15)
+    dummy=models.CharField(max_length=20)
 
     def __str__(self):
         return self.subject

@@ -27,10 +27,23 @@ def import_data(request):
 							  request.FILES)
 
 		if form.is_valid():
+
+
 			request.FILES['file'].save_book_to_database(
 				models=[UserSub],
 				initializers=[None],
-				mapdicts=[['number', 'subject']]
+				mapdicts=[{'년도': 'number',
+						   '학기': 'dummy',
+						   '학수번호':'dummy',
+						   '교과목명': 'subject',
+						   '이수구분': 'dummy',
+			               '교직영역': 'dummy',
+				           '선택영역': 'dummy',
+						   '학점': 'dummy',
+			               '평가방식': 'dummy',
+						   '등급': 'dummy',
+		                   '평점': 'dummy',
+			               '개설학과코드': 'dummy'}]
 			)
 			return redirect('resultTrack')
 		else:
@@ -66,11 +79,14 @@ def allTrack(request):
 	return render(request,'home/allTrack.html',context)
 
 def resultTrack(request):
+
 	users=User.objects.all()
 	usersubs=UserSub.objects.all()
 	tracklists = TrackList.objects.all()
 	bsublists=BsubList.objects.all()
 	asublists=AsubList.objects.all()
+
+	usersubs.update(number = request.user.get_username())  # 일괄 update 요청
 
 	context={'users':users,
 			 'usersubs':usersubs,
