@@ -38,7 +38,7 @@ def message(request):
     return_json_str = json.loads(message)
     return_str = return_json_str['content'] #버튼 항목중 무엇을 눌렀는가
 
-	if return_str == "전체 트랙 보기":
+    if return_str == "전체 트랙 보기":
 		return JsonResponse({
 			"message": {
 				"text": '트랙을 선택하세요'
@@ -73,6 +73,7 @@ def message(request):
 							"처음으로"]
 			}
 		})
+
 	elif return_str == "사물인터넷":
 		return JsonResponse({
 			"message": {
