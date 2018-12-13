@@ -33,7 +33,7 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-class UserSub(models.Model):
+class Sheet1(models.Model):
     number=models.CharField(max_length=10)
     subject=models.CharField(max_length=15)
     dummy=models.CharField(max_length=20)

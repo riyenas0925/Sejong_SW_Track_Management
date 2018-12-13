@@ -4,12 +4,12 @@ from .models import BsubList
 from .models import AsubList
 from .models import Post
 from .models import User
-from .models import UserSub
+from .models import Sheet1
 # Register your models here.
 
 
 admin.site.register(User)
-admin.site.register(UserSub)
+admin.site.register(Sheet1)
 
 class TrackListadmin(admin.ModelAdmin):
     list_display = ['tname', 'tnum']

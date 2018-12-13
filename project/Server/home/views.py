@@ -9,7 +9,7 @@ from .models import TrackList
 from .models import BsubList
 from .models import AsubList
 from .models import User
-from .models import UserSub
+from .models import Sheet1
 
 
 import datetime
@@ -20,7 +20,7 @@ class UploadFileForm(forms.Form):
 
 
 def import_data(request):
-	UserSub.objects.all().delete()
+	Sheet1.objects.all().delete()
 
 	if request.method == "POST":
 		form = UploadFileForm(request.POST,
@@ -30,7 +30,7 @@ def import_data(request):
 
 
 			request.FILES['file'].save_book_to_database(
-				models=[UserSub],
+				models=[Sheet1],
 				initializers=[None],
 				mapdicts=[{'년도': 'number',
 						   '학기': 'dummy',
@@ -62,7 +62,7 @@ def import_data(request):
 
 def handson_table(request):
 	return excel.make_response_from_tables(
-		[UserSub], 'handsontable.html')
+		[Sheet1], 'handsontable.html')
 
 def post_list(request):
 	return render(request, 'home/main.html')
@@ -81,7 +81,7 @@ def allTrack(request):
 def resultTrack(request):
 
 	users=User.objects.all()
-	usersubs=UserSub.objects.all()
+	usersubs=Sheet1.objects.all()
 	tracklists = TrackList.objects.all()
 	bsublists=BsubList.objects.all()
 	asublists=AsubList.objects.all()
