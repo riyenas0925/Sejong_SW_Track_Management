@@ -144,7 +144,7 @@ def message(request):
     elif return_str == "HCI&비쥬얼컴퓨팅":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(0)
             },
             "keyboard": {
                 "type": "buttons",
@@ -156,7 +156,7 @@ def message(request):
     elif return_str == "멀티미디어":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(1)
             },
             "keyboard": {
                 "type": "buttons",
@@ -168,7 +168,7 @@ def message(request):
     elif return_str == "사물인터넷":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(2)
             },
             "keyboard": {
                 "type": "buttons",
@@ -180,7 +180,7 @@ def message(request):
     elif return_str == "시스템응용":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(3)
             },
             "keyboard": {
                 "type": "buttons",
@@ -192,7 +192,7 @@ def message(request):
     elif return_str == "인공지능":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(4)
             },
             "keyboard": {
                 "type": "buttons",
@@ -204,7 +204,7 @@ def message(request):
     elif return_str == "가상현실":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(5)
             },
             "keyboard": {
                 "type": "buttons",
@@ -216,7 +216,7 @@ def message(request):
     elif return_str == "정보보호":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(6)
             },
             "keyboard": {
                 "type": "buttons",
@@ -228,7 +228,7 @@ def message(request):
     elif return_str == "데이터사이언스":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(7)
             },
             "keyboard": {
                 "type": "buttons",
@@ -240,7 +240,7 @@ def message(request):
     elif return_str == "SW교육":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(8)
             },
             "keyboard": {
                 "type": "buttons",
@@ -252,7 +252,7 @@ def message(request):
     elif return_str == "사이버국방":
         return JsonResponse({
             "message": {
-                "text": "test"
+                "text": all_track(9)
             },
             "keyboard": {
                 "type": "buttons",
@@ -303,6 +303,57 @@ def message(request):
 				"buttons": ["공지사항", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
 			}
         })
+
+def trackread():
+    global tname
+    global tbase
+    global tuse
+
+    treq = urllib.request.Request("http://ec2-18-216-35-115.us-east-2.compute.amazonaws.com:8000/allTrack",
+                                  headers={'User-Agent': 'Mozilla/5.0'})
+
+    tresponse = urllib.request.urlopen(treq)
+    ttext = tresponse.read().decode("utf8")
+    tsoup = BeautifulSoup(ttext, 'html.parser')
+
+    tname = tsoup.find_all('td', {'class': 'tname'})
+    tbase = tsoup.find_all('td', {'class': 'tbase'})
+    tuse = tsoup.find_all('td', {'class': 'tuse'})
+
+    for n in tname:
+        i = tname.index(n)
+        tname[i] = n.get_text().replace(" ", "")
+
+    for n in tbase:
+        i = tbase.index(n)
+        tbase[i] = n.get_text().replace(" ", "")
+
+    for n in tuse:
+        i = tuse.index(n)
+        tuse[i] = n.get_text().replace(" ", "")
+
+
+##전체 트랙값 스트링 반환 함수##
+def all_track(track):
+    global tnum
+    global tuse
+    global tbase
+
+    trackread()
+
+    all = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    # all에다가 문자열을 추가
+    for i in range(0, len(tname)):
+        all[i] = str(i + 1) + '.' + str(tname[i]) + '\n\n*기초교과*\n' + str(tbase[i]) + '\n\n*응용교과*\n' + str(tuse[i])
+
+    list = all[track].split(",")
+
+    abc = ""
+    for i in range(0, len(list)):
+        abc = abc + list[i] + "\n"
+
+    return abc  # 해당 인덱스의 트랙 반환
 
 
 def notice():
