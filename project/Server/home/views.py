@@ -326,11 +326,11 @@ def trackread():
 
     for n in tbase:
         i = tbase.index(n)
-        tbase[i] = n.get_text().replace(" ", "")
+        tbase[i] = n.get_text().replace(" ", "").replace("\n", "")
 
     for n in tuse:
         i = tuse.index(n)
-        tuse[i] = n.get_text().replace(" ", "")
+        tuse[i] = n.get_text().replace("\n", "").replace(" ", "")
 
 
 ##전체 트랙값 스트링 반환 함수##
@@ -373,6 +373,7 @@ def notice():
     s_str = []
     w_str = []
     d_str = []
+
     for i in range(0, 5):
         n = subject[i].get_text().replace("\r", "").replace("\t", "").replace("\n", "")
         s_str.append(n)
