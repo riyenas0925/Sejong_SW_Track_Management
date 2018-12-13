@@ -20,8 +20,6 @@ from home import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^keyboard', views.keyboard),
-    url(r'^message', views.message),
     url('^', include('django.contrib.auth.urls')),
     url(r'', include('home.urls')),
 ]
