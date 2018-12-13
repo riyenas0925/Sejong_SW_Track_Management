@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest, HttpResponse
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django import forms
 import django_excel as excel
+
+import json
+import requests
 
 from django.utils import timezone
 from .models import Post
@@ -18,6 +24,13 @@ import datetime
 class UploadFileForm(forms.Form):
 	file = forms.FileField()
 
+def keyboard(request):
+    return JsonResponse(
+        {
+            "type" : "buttons",
+            "buttons" : ["공지사항","전체 트랙 보기","소프트웨어융합대학 사이트"]
+        }
+    )
 
 def import_data(request):
 	Sheet1.objects.all().delete()
