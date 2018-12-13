@@ -43,15 +43,15 @@
 
                         {% for tracklist in tracklists%}
                         <tr>
-                          <td style="font-weight:bold;padding-top:2%;padding-bottom:2%;text-align:center;">{{tracklist.tname}}</td>
-                          <td>
+                          <td class="tname" style="font-weight:bold;padding-top:2%;padding-bottom:2%;text-align:center;">{{tracklist.tname}}</td>
+                          <td class="tbase">
                             {% for bsublist in bsublists %}
                                 {% if tracklist.tnum == bsublist.tnum %}
                                     {{bsublist.bname}}<br>
                                 {% endif %}
                             {% endfor %}
                           </td>
-                          <td style="width:50%;">
+                          <td class="tuse" style="width:50%;">
                             {% for asublist in asublists %}      
                             {% if tracklist.tnum == asublist.tnum %}
                                 {{asublist.aname}},&nbsp;
