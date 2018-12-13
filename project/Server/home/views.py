@@ -304,6 +304,7 @@ def message(request):
 			}
         })
 
+
 def trackread():
     global tname
     global tbase
@@ -326,11 +327,11 @@ def trackread():
 
     for n in tbase:
         i = tbase.index(n)
-        tbase[i] = n.get_text().replace(" ", "").replace("\n", "")
+        tbase[i] = n.get_text().replace(" ", "").replace("\n", ",")
 
     for n in tuse:
         i = tuse.index(n)
-        tuse[i] = n.get_text().replace("\n", "").replace(" ", "")
+        tuse[i] = n.get_text().replace(" ", "").replace("\n", "").replace(" ", "")
 
 
 ##전체 트랙값 스트링 반환 함수##
@@ -345,15 +346,23 @@ def all_track(track):
 
     # all에다가 문자열을 추가
     for i in range(0, len(tname)):
-        all[i] = str(i + 1) + '.' + str(tname[i]) + '\n\n*기초교과*\n' + str(tbase[i]) + '\n\n*응용교과*\n' + str(tuse[i])
+        all[i] = str(i + 1) + '.' + str(tname[i]) + '\n\n*기초교과*\n'
 
-    list = all[track].split(",")
+        base = tbase[i].split(",")
+        use = tuse[i].split(",")
 
-    abc = ""
-    for i in range(0, len(list)):
-        abc = abc + list[i] + "\n"
+        for j in range(0, len(base)):
+            if (base[j] != ""):
+                all[i] += base[j] + "\n"
 
-    return abc  # 해당 인덱스의 트랙 반환
+        all[i] += '\n\n*응용교과*\n'
+
+        for j in range(0, len(use)):
+            all[i] += use[j] + "\n"
+
+        print(all[i])
+
+    return all[track]  # 해당 인덱스의 트랙 반환
 
 
 def notice():
