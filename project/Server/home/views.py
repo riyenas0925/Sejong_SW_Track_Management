@@ -360,8 +360,6 @@ def all_track(track):
         for j in range(0, len(use)):
             all[i] += use[j] + "\n"
 
-        print(all[i])
-
     return all[track]  # 해당 인덱스의 트랙 반환
 
 
