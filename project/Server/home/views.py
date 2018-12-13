@@ -297,7 +297,11 @@ def message(request):
                     "label": "세종대학교 공지 바로가기",
                     "url": "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=333"
                 }
-            }
+            },
+			"keyboard": {
+				"type": "buttons",
+				"buttons": ["공지사항", "전체 트랙 보기", "소프트웨어융합대학 사이트"]
+			}
         })
 
 
