@@ -116,9 +116,9 @@ def resultTrack(request):
 def test(request):
     return render(request,'home/test.html')
 
-def notice(request):
+def notice2(request):
     posts = Post.objects.all().order_by('-created_date') #날짜 역순
-    context = {'posts':posts }
+    context = {'posts': posts}
     return render(request,'home/notice.html',context)
 
 

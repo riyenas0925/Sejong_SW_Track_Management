@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^import', views.import_data, name="import"),
     url(r'^handson_view', views.handson_table, name="handson_view"),
     url(r'^test',views.test,name="test"),
-    url(r'^notice',views.notice,name="notice"),
+    url(r'^notice',views.notice2,name="notice"),
     url(r'^stats',views.trackRate,name="stats"),
 ]
