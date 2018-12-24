@@ -25,3 +25,4 @@ urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url(r'', include('home.urls')),
 ]
+
