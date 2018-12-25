@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ba08297d-fc58-4104-bb23-16b6b42e506d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Server/Server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/Server/Server/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/Server/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/project/Server/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/Server/home/templates/home/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/Server/home/templates/home/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Server/home/templates/home/notice.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/Server/home/templates/home/notice.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +19,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Server/home/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+            <state relative-caret-position="247">
+              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -28,11 +28,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Server/home/templates/home/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="304">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#p#0;n#div#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,11 +103,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="notice.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="notice.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/Server/home/templates/home/notice.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+            <state relative-caret-position="418">
+              <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#section#1;n#!!top" expanded="true" />
               </folding>
@@ -131,12 +136,13 @@
         <option value="$PROJECT_DIR$/project/Server/home/urls.py" />
         <option value="$PROJECT_DIR$/project/Server/Server/urls.py" />
         <option value="$PROJECT_DIR$/project/Server/home/templates/home/main.html" />
+        <option value="$PROJECT_DIR$/project/Server/home/templates/home/notice.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-7" />
-    <option name="width" value="974" />
+    <option name="width" value="988" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -245,16 +251,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="988" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28496867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2808642" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25778732" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25778732" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -555,16 +562,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Server/home/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/Server/home/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2489">
@@ -572,20 +569,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Server/home/templates/home/notice.html">
+    <entry file="file://$PROJECT_DIR$/project/Server/home/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+        <state relative-caret-position="247">
+          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/Server/home/templates/home/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="304">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#0;n#div#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Server/home/templates/home/notice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
