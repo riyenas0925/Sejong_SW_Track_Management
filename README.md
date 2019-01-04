@@ -31,7 +31,10 @@
     $ sudo apt-get install git
     $ sudo apt-get install python3-pip
     $ sudo pip3 install django
+    $ sudo pip3 install django-excel
+    $ sudo pip3 install pyexcel-xls
     $ sudo pip3 install bs4
+    $ sudo pip3 install requests
 
 2. Git에서 리포지토리 가져오기
 >
