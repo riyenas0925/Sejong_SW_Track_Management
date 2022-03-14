@@ -1,1 +1,2 @@
 project/Server/home/static/** linguist-vendored
+project/Server/venv/** linguist-vendored
